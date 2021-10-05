@@ -667,8 +667,3 @@ int vips_contrast_bridge(VipsImage *in, VipsImage **out, double k)
 {
     return vips_linear1(in, out, k , 0.0, NULL);
 }
-
-int vips_sharpen_bridge(VipsImage *in, VipsImage **out, int m2)
-{
-    return vips_sharpen(in, out, m2, NULL);
-}
