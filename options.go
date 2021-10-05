@@ -225,6 +225,7 @@ type Options struct {
 	Gamma          float64
 	Brightness     float64
 	Contrast       float64
+	Sharpness      int
 	OutputICC      string
 	InputICC       string
 	Palette        bool

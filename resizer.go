@@ -153,6 +153,12 @@ func resizer(buf []byte, o Options) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	// Apply contrast, if necessary
+	image, err = applySharpness(image, o)
+	if err != nil {
+		return nil, err
+	}
 	
 	return saveImage(image, o)
 }
@@ -645,6 +651,17 @@ func applyContrast(image *C.VipsImage, o Options) (*C.VipsImage, error) {
 	var err error
 	if o.Contrast > 0 {
 		image, err = vipsContrast(image, o.Contrast)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return image, nil
+}
+
+func applySharpness(image *C.VipsImage, o Options) (*C.VipsImage, error) {
+	var err error
+	if o.Sharpness > 0 {
+		image, err = vipsSharpen(image, o.Sharpness)
 		if err != nil {
 			return nil, err
 		}
