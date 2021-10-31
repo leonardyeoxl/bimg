@@ -497,34 +497,19 @@ vips_watermark(VipsImage *in, VipsImage **out, WatermarkTextOptions *to, Waterma
 	t[0] = in;
 
 	// Make the mask.
-	if (strlen(to->Font) == 0) {
-		if (
-			vips_text(&t[1], to->Text,
-				"width", o->Width,
-				"dpi", o->DPI,
-				"fontfile", to->FontFile,
-				NULL) ||
-			vips_linear1(t[1], &t[2], o->Opacity, 0.0, NULL) ||
-			vips_cast(t[2], &t[3], VIPS_FORMAT_UCHAR, NULL) ||
-			vips_embed(t[3], &t[4], o->Left, o->Top, t[3]->Xsize + o->Margin + o->Left, t[3]->Ysize + o->Margin +  o->Top, NULL)
-			) {
-			g_object_unref(base);
-			return 1;
-		}
-	} else {
-		if (
-			vips_text(&t[1], to->Text,
-				"width", o->Width,
-				"dpi", o->DPI,
-				"font", to->Font,
-				NULL) ||
-			vips_linear1(t[1], &t[2], o->Opacity, 0.0, NULL) ||
-			vips_cast(t[2], &t[3], VIPS_FORMAT_UCHAR, NULL) ||
-			vips_embed(t[3], &t[4], o->Left, o->Top, t[3]->Xsize + o->Margin + o->Left, t[3]->Ysize + o->Margin +  o->Top, NULL)
-			) {
-			g_object_unref(base);
-			return 1;
-		}
+	if (
+		vips_text(&t[1], to->Text,
+			"width", o->Width,
+			"dpi", o->DPI,
+			"font", to->Font,
+			"fontfile", to->FontFile,
+			NULL) ||
+		vips_linear1(t[1], &t[2], o->Opacity, 0.0, NULL) ||
+		vips_cast(t[2], &t[3], VIPS_FORMAT_UCHAR, NULL) ||
+		vips_embed(t[3], &t[4], o->Left, o->Top, t[3]->Xsize + o->Margin + o->Left, t[3]->Ysize + o->Margin +  o->Top, NULL)
+		) {
+		g_object_unref(base);
+		return 1;
 	}
 	
 
