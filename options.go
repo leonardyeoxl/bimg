@@ -161,6 +161,7 @@ type Watermark struct {
 	NoReplicate bool
 	Text        string
 	Font        string
+	FontFile	string
 	Background  Color
 }
 

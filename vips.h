@@ -41,6 +41,7 @@ enum types {
 typedef struct {
 	const char *Text;
 	const char *Font;
+	const char *FontFile;
 } WatermarkTextOptions;
 
 typedef struct {
@@ -501,6 +502,7 @@ vips_watermark(VipsImage *in, VipsImage **out, WatermarkTextOptions *to, Waterma
 			"width", o->Width,
 			"dpi", o->DPI,
 			"font", to->Font,
+			"fontfile", to->FontFile,
 			NULL) ||
 		vips_linear1(t[1], &t[2], o->Opacity, 0.0, NULL) ||
 		vips_cast(t[2], &t[3], VIPS_FORMAT_UCHAR, NULL) ||
