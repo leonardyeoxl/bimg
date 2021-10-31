@@ -371,9 +371,9 @@ func watermarkImageWithText(image *C.VipsImage, w Watermark) (*C.VipsImage, erro
 	}
 
 	// Defaults
-	if w.Font == "" {
-		w.Font = WatermarkFont
-	}
+	// if w.Font == "" {
+	// 	w.Font = WatermarkFont
+	// }
 	if w.Width == 0 {
 		w.Width = int(math.Floor(float64(image.Xsize / 6)))
 	}
